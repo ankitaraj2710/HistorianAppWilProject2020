@@ -32,6 +32,8 @@
         <activity android:name=".profile"></activity>
         <activity android:name=".payment"></activity>
         <activity android:name=".museum"></activity>
+        <activity android:name=".ReviewPage"></activity>
+
 
     </application>
 

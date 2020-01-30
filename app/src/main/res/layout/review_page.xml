@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/museum" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="146dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="69dp"
+        android:text="Located at xx St"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="121dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="91dp"
+        android:text="Price : $"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="152dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="235dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="Current Exhibits                          Wooly momoth Ero                    Roman Mythology       Nostradomus Prophecies"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="367dp"
+        android:layout_height="411dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#000000">
+
+            </View>
+
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/male" />
+
+            <View
+                android:layout_width="175dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="-110dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="160dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="175dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="13dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="170dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="15dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="140dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="17dp"
+                android:background="#000000">
+
+            </View>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="25dp"
+                android:background="#000000">
+
+            </View>
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/woman" />
+
+            <View
+                android:layout_width="175dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="-110dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="160dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="175dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="13dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="170dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="15dp"
+                android:background="#000000">
+
+            </View>
+
+            <View
+                android:layout_width="140dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="17dp"
+                android:background="#000000">
+
+            </View>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="25dp"
+                android:background="#000000">
+
+            </View>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
