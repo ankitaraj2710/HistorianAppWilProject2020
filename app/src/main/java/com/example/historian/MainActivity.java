@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     public Button find;
+    //EditText firstname,contact,lastname,emailid,dob;
+   // Button Save;
     GoogleMap map;
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
@@ -43,13 +45,26 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     // current Location
     Location currentlocation;
     FusedLocationProviderClient fusedLocationProviderClient;
-
+    //Databae instance
+    //DataBase MyDataBase;
     private  static final int REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        //Call Constructer for database
+         // MyDataBase = new DataBase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //profile page edittext and button
+//        firstname = (EditText)findViewById(R.id.editTextfirstname);
+//        lastname = (EditText)findViewById(R.id.editTextlastname);
+//        contact =  (EditText)findViewById(R.id.editTextcontact);
+//        emailid = (EditText)findViewById(R.id.editTextemailid);
+//        dob = (EditText)findViewById(R.id.dobedittext);
+//        Save = (Button)findViewById(R.id.Savebutton);
 
         find = (Button)findViewById(R.id.find);
         find.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +95,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchlastlocation();
 
+
     }
+
 
     private void fetchlastlocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

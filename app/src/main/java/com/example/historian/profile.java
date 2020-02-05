@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class profile extends AppCompatActivity  {
+
+    DataBase MyDataBase;
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -62,6 +65,7 @@ public class profile extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        MyDataBase = new DataBase(this);
         setContentView(R.layout.profile_page);
 
         welcometextview = (TextView) findViewById(R.id.welcometextview);
@@ -83,7 +87,7 @@ public class profile extends AppCompatActivity  {
         dobtextview = (TextView) findViewById(R.id.dobtextview);
         dobedittext = (EditText) findViewById(R.id.dobedittext);
         imageViewcalendar = (ImageButton) findViewById(R.id.imageViewcalendar);
-        Savebutton = (Button) findViewById(R.id.Savebutton);
+        Savebutton = (Button) findViewById(R.id.SaveDetail);
 
 
 
@@ -142,11 +146,28 @@ public class profile extends AppCompatActivity  {
 
 
 
+AddDetails();
 
 
 
 
+    }
+    //method for save button
+    public  void AddDetails(){
+        Savebutton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean isInserted =   MyDataBase.insertData(editTextfirstname.getText().toString(),editTextlastname.getText().toString(),editTextcontact.getText().toString(),editTextemailid.getText().toString(),dobedittext.getText().toString());
 
+                        if(isInserted = true)
+                            Toast.makeText(profile.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(profile.this, "Data Not Inserted", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+        );
     }
 
     @Override

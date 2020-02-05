@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class payment extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+  //DataBase
+    DataBase MyDataBase;
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -37,11 +40,12 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
     public EditText editTextexpirydate;
     public ImageButton calimageView;
 
-    public Button Savebutton;
+    public Button SaveDetail;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        MyDataBase = new DataBase(this);
         setContentView(R.layout.payment_page);
 
 
@@ -60,12 +64,27 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
         calimageView = (ImageButton) findViewById(R.id.calimageView);
 
 
-        Savebutton =  (Button) findViewById(R.id.Savebutton);
-
-
+        SaveDetail =  (Button) findViewById(R.id.SaveDetail);
+ AddPaymentDetail();
 
 
     }
+   public void AddPaymentDetail(){
+        SaveDetail.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                      boolean isAdded = MyDataBase.insert(editTextName.getText().toString(),editTextcardnumber.getText().toString(),editTextcvv.getText().toString(),editTextexpirydate.getText().toString());
+                    if (isAdded = true)
+                        Toast.makeText(payment.this, "Detail Added Successfully", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(payment.this, "Detail Not Added Successfully ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+   }
+
+
 
 
     @Override
