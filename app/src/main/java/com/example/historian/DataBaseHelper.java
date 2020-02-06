@@ -9,6 +9,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String DataBaseName = "PaymentDetail.db";
     public static final String TableName = "Payment_Detail";
     public static final String Table_Name = "User_Detail";
+    public static final String Table_Name1 = "User_image";
     //public static final  String Table_Name1 = "Payment_Detail";
 
     public static final String column1 = "UserName";
@@ -20,6 +21,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String column7 = "CardNumber";
     public static final String column8 = "CVV";
     public static final String column9 = "ExpiryDate";
+    public static final String column0 = "UserImage";
 
     public DataBaseHelper(Context context) {
         super(context, DataBaseName, null, 2);
@@ -32,8 +34,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String User_Detail = "CREATE TABLE " + Table_Name + "(UserName TEXT,UserLastName TEXT,UserContact INTEGER,UserEmailID TEXT,UserDOB INTEGER)";
 
+        String User_image = "CREATE TABLE " + Table_Name1 + " (userImage image) ";
         sqLiteDatabase.execSQL(Payment_Detail);
         sqLiteDatabase.execSQL(User_Detail);
+        sqLiteDatabase.execSQL(User_image);
 
     }
 
@@ -41,12 +45,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    //create insert image method
+    public  boolean insertImage(byte[] userImage){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues0 = new ContentValues();
+        contentValues0.put(column0,userImage);
+        db.insert(Table_Name1,null,contentValues0);
+        return true;
+    }
 //
 //Create insert method
 
     public boolean insertData(String fname, String Lname, String contact, String  email, String DOB){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues1 = new ContentValues();
+
         contentValues1.put(column1, fname);
         contentValues1.put(column2, Lname);
         contentValues1.put(column3, contact);

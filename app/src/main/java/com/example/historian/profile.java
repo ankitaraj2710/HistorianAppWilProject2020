@@ -1,7 +1,13 @@
 package com.example.historian;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +19,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class profile extends AppCompatActivity  {
+public class profile extends AppCompatActivity {
 
     DataBaseHelper MyDataBase;
 
@@ -90,31 +100,24 @@ public class profile extends AppCompatActivity  {
         Savebutton = (Button) findViewById(R.id.SaveDetail);
 
 
-
-                myCalendar = (Calendar) Calendar.getInstance();
+        myCalendar = (Calendar) Calendar.getInstance();
         startDate = (Calendar) Calendar.getInstance();
         imageViewcalendar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener()
-                {
+            public void onClick(View v) {
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
-                    {
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         myCalendar.set(Calendar.YEAR, year);
                         myCalendar.set(Calendar.MONTH, month);
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                        if (start_or_end == 1)
-                        {
+                        if (start_or_end == 1) {
                             startDate.set(Calendar.YEAR, year);
                             startDate.set(Calendar.MONTH, month);
                             startDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             dobedittext.setText(sdf.format(myCalendar.getTime()));
-                        }
-                        else
-                        {
+                        } else {
 
                         }
 
@@ -122,19 +125,15 @@ public class profile extends AppCompatActivity  {
                 };
 
 
-                dobedittext.setOnFocusChangeListener(new View.OnFocusChangeListener()
-                {
+                dobedittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
-                    public void onFocusChange(View v, boolean hasFocus)
-                    {
-                        if (hasFocus)
-                        {
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
                             start_or_end = 1;
-                            DatePickerDialog dialog = new DatePickerDialog(profile.this ,date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                            DatePickerDialog dialog = new DatePickerDialog(profile.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
                             dialog.show();
 
-                        } else
-                        {
+                        } else {
 
                         }
                     }
@@ -145,23 +144,58 @@ public class profile extends AppCompatActivity  {
         });
 
 
+        //Request For Camera permission
+        if (ContextCompat.checkSelfPermission(profile.this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(profile.this,
+                    new String[]{
+                            Manifest.permission.CAMERA
+                    },
+                    100);
 
-AddDetails();
-
-
-
-
-    }
-    //method for save button
-    public  void AddDetails(){
-        Savebutton.setOnClickListener(
+        }
+        imageViewcamera.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        byte[] UserImage = imageViewToByte(imageViewcamera);
+                        // to open camera
+                      
+                        AddProfile(UserImage);
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent, 100);
+                    }
 
-                         MyDataBase.insertData(editTextfirstname.getText().toString(),editTextlastname.getText().toString(),editTextcontact.getText().toString(),editTextemailid.getText().toString(),dobedittext.getText().toString());
+                    private void AddProfile(byte[] UserImage) {
+                        MyDataBase.insertImage(UserImage);
+                    }
 
-                        if(isInserted = true)
+                    private byte[] imageViewToByte(ImageView imageViewcamera)
+                    {
+                      Bitmap bitmap = ((BitmapDrawable) imageViewcamera.getDrawable()).getBitmap();
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG,256,stream);
+                        byte[] byteArray = stream.toByteArray();
+                        return byteArray;
+                    }
+                });
+
+        AddDetails();
+
+
+    }
+
+
+    //method for save button
+    public void AddDetails() {
+        Savebutton.setOnClickListener(
+                 new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        MyDataBase.insertData(editTextfirstname.getText().toString(), editTextlastname.getText().toString(), editTextcontact.getText().toString(), editTextemailid.getText().toString(), dobedittext.getText().toString());
+
+                        if (isInserted = true)
                             Toast.makeText(profile.this, "Data Inserted", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(profile.this, "Data Not Inserted", Toast.LENGTH_SHORT).show();
@@ -170,6 +204,18 @@ AddDetails();
                 }
         );
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 100) {
+            //get image capture
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            //set captured image to imageView
+            imageViewcamera.setImageBitmap(captureImage);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
