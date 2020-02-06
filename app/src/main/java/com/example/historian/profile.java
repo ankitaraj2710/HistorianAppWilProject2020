@@ -23,7 +23,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 public class profile extends AppCompatActivity  {
 
-    DataBase MyDataBase;
+    DataBaseHelper MyDataBase;
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -48,7 +48,7 @@ public class profile extends AppCompatActivity  {
     public EditText dobedittext;
     public ImageButton imageViewcalendar;
     public Button Savebutton;
-
+    boolean isInserted;
 
     //Calendar
 
@@ -65,7 +65,7 @@ public class profile extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        MyDataBase = new DataBase(this);
+        MyDataBase = new DataBaseHelper(this);
         setContentView(R.layout.profile_page);
 
         welcometextview = (TextView) findViewById(R.id.welcometextview);
@@ -91,7 +91,7 @@ public class profile extends AppCompatActivity  {
 
 
 
-        myCalendar = (Calendar) Calendar.getInstance();
+                myCalendar = (Calendar) Calendar.getInstance();
         startDate = (Calendar) Calendar.getInstance();
         imageViewcalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +158,8 @@ AddDetails();
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isInserted =   MyDataBase.insertData(editTextfirstname.getText().toString(),editTextlastname.getText().toString(),editTextcontact.getText().toString(),editTextemailid.getText().toString(),dobedittext.getText().toString());
+
+                         MyDataBase.insertData(editTextfirstname.getText().toString(),editTextlastname.getText().toString(),editTextcontact.getText().toString(),editTextemailid.getText().toString(),dobedittext.getText().toString());
 
                         if(isInserted = true)
                             Toast.makeText(profile.this, "Data Inserted", Toast.LENGTH_SHORT).show();

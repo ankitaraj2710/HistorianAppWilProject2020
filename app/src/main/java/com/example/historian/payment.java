@@ -20,7 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 public class payment extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   //DataBase
-    DataBase MyDataBase;
+    DataBaseHelper MyDataBase1;
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -28,61 +28,67 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
 
     public TextView welcometextview;
     public TextView nametextview;
-    public EditText editTextName;
+    public EditText editTextName1;
 
     public TextView cardnumbertextview;
-    public EditText editTextcardnumber;
+    public EditText editTextcardnumber1;
 
     public TextView cvvtextview;
-    public EditText editTextcvv;
+    public EditText editTextcvv1;
 
     public TextView expirydatetextview;
-    public EditText editTextexpirydate;
+    public EditText editTextexpirydate1;
     public ImageButton calimageView;
 
-    public Button SaveDetail;
+    public Button SaveDetail1;
+
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        MyDataBase = new DataBase(this);
+        MyDataBase1 = new DataBaseHelper(this);
         setContentView(R.layout.payment_page);
 
 
         welcometextview = (TextView) findViewById(R.id.welcometextview);
         nametextview = (TextView) findViewById(R.id.nametextview);
-        editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextName1 = (EditText) findViewById(R.id.editTextName);
 
         cardnumbertextview = (TextView) findViewById(R.id.cardnumbertextview);
-        editTextcardnumber = (EditText) findViewById(R.id.editTextcardnumber);
+        editTextcardnumber1 = (EditText) findViewById(R.id.editTextcardnumber);
 
         cvvtextview = (TextView) findViewById(R.id.cvvtextview);
-        editTextcvv = (EditText) findViewById(R.id.editTextcvv);
+        editTextcvv1 = (EditText) findViewById(R.id.editTextcvv);
 
         expirydatetextview = (TextView) findViewById(R.id.expirydatetextview);
-        editTextexpirydate = (EditText) findViewById(R.id.editTextexpirydate);
+        editTextexpirydate1 = (EditText) findViewById(R.id.editTextexpirydate);
         calimageView = (ImageButton) findViewById(R.id.calimageView);
 
 
-        SaveDetail =  (Button) findViewById(R.id.SaveDetail);
- AddPaymentDetail();
+        SaveDetail1 =  (Button) findViewById(R.id.SaveDetail);
+        AddPaymentDetail();
 
 
     }
+
    public void AddPaymentDetail(){
-        SaveDetail.setOnClickListener(
+
+        SaveDetail1.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                      boolean isAdded = MyDataBase.insert(editTextName.getText().toString(),editTextcardnumber.getText().toString(),editTextcvv.getText().toString(),editTextexpirydate.getText().toString());
-                    if (isAdded = true)
-                        Toast.makeText(payment.this, "Detail Added Successfully", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(payment.this, "Detail Not Added Successfully ", Toast.LENGTH_SHORT).show();
+                    public void onClick(View view) {
+                        boolean isAdded =  MyDataBase1.insertDetail(editTextName1.getText().toString(),editTextcardnumber1.getText().toString(),editTextcvv1.getText().toString(),editTextexpirydate1 .getText().toString());
+                        if(isAdded = true)
+                            Toast.makeText(payment.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(payment.this, "Data Not Inserted", Toast.LENGTH_SHORT).show();
                     }
                 }
+
         );
+
    }
+
 
 
 
