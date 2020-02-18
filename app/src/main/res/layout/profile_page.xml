@@ -11,29 +11,25 @@
         android:layout_width="219dp"
         android:layout_height="42dp"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="201dp"
         android:text="Welcome abc,"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="31dp"
-        android:layout_marginRight="201dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/profilepicturetextview"
         android:layout_width="202dp"
         android:layout_height="49dp"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="500dp"
-        android:layout_marginEnd="104dp"
+        android:layout_marginEnd="4dp"
         android:text="Profile Picture"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcometextview"
-        android:layout_marginRight="104dp" />
+        app:layout_constraintTop_toBottomOf="@+id/welcometextview" />
 
     <ImageView
         android:id="@+id/imageViewcamera"
@@ -56,14 +52,10 @@
         android:layout_height="43dp"
         android:layout_marginStart="9dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="36dp"
         android:text="First Name"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextfirstname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewcamera"
-        android:layout_marginLeft="9dp"
-        android:layout_marginRight="36dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewcamera" />
 
     <EditText
         android:id="@+id/editTextfirstname"
@@ -82,15 +74,11 @@
         android:layout_width="137dp"
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="21dp"
         android:text="Last Name"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextlastname"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstnametextview"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="21dp" />
+        app:layout_constraintTop_toBottomOf="@+id/firstnametextview" />
 
     <EditText
         android:id="@+id/editTextlastname"
@@ -113,14 +101,10 @@
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="21dp"
         android:text="Contact"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextcontact"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastnametextview"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="21dp" />
+        app:layout_constraintTop_toBottomOf="@+id/lastnametextview" />
 
     <EditText
         android:id="@+id/editTextcontact"
@@ -137,21 +121,18 @@
         android:layout_marginLeft="21dp"
         android:layout_marginRight="24dp" />
 
+
     <TextView
         android:id="@+id/emailidtextview"
         android:layout_width="137dp"
         android:layout_height="43dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
         android:text="Email ID"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextemailid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contacttextview"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="32dp" />
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contacttextview" />
 
     <EditText
         android:id="@+id/editTextemailid"
@@ -170,16 +151,12 @@
         android:layout_width="137dp"
         android:layout_height="43dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
         android:text="DOB"
+
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/dobedittext"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailidtextview"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="32dp" />
+        app:layout_constraintTop_toBottomOf="@+id/emailidtextview" />
 
     <ImageButton
         android:id="@+id/imageViewcalendar"

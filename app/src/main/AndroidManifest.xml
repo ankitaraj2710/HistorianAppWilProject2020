@@ -37,6 +37,9 @@
         <activity android:name=".payment"></activity>
         <activity android:name=".museum"></activity>
         <activity android:name=".ReviewPage"></activity>
+        <activity android:name=".Demo"/>
+        <activity android:name=".Myadapter"/>
+        <activity android:name=".Listitem"/>
 
 
     </application>

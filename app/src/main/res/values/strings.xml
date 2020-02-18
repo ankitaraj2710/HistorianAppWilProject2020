@@ -17,6 +17,22 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+
+    // error messages for profile page
+    <string name="Picture_Error">Add Profile Picture</string>
+    <string name="firstName_Error">Enter First Name</string>
+    <string name="LastName_Error">Enter Last Name</string>
+    <string name="Contact_Error">Enter Contact</string>
+    <string name="Email_Error">Enter Email-Id</string>
+    <string name="DOB_Error">Enter DOB</string>
+    // error messages for payment page
+    <string name="NameOnCard_Error">Enter Name on Card</string>
+    <string name="CardNumber_Error">Enter Card Number</string>
+    <string name="CVV_Error">Enter CVV</string>
+    <string name="ExpiryDate_Error">Enter Expiry Date</string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -11,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -41,9 +44,11 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
     public ImageButton calimageView;
 
     public Button SaveDetail1;
+    AwesomeValidation awesomeValidation;
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
         super.onCreate(savedInstanceState);
         MyDataBase1 = new DataBaseHelper(this);
@@ -67,9 +72,16 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
 
         SaveDetail1 =  (Button) findViewById(R.id.SaveDetail);
         AddPaymentDetail();
-
+        CheckValidData();
 
     }
+private void CheckValidData(){
+    awesomeValidation.addValidation(payment.this,R.id.editTextName, "[a-zA-Z\\s]+",R.string.NameOnCard_Error);
+    awesomeValidation.addValidation(payment.this,R.id.editTextcardnumber,RegexTemplate.NOT_EMPTY,R.string.CardNumber_Error);
+    awesomeValidation.addValidation(payment.this,R.id.editTextcvv,RegexTemplate.NOT_EMPTY,R.string.CVV_Error);
+    awesomeValidation.addValidation(payment.this,R.id.editTextexpirydate, RegexTemplate.NOT_EMPTY,R.string.ExpiryDate_Error);
+
+}
 
    public void AddPaymentDetail(){
 
@@ -77,17 +89,25 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (awesomeValidation.validate()){
                         boolean isAdded =  MyDataBase1.insertDetail(editTextName1.getText().toString(),editTextcardnumber1.getText().toString(),editTextcvv1.getText().toString(),editTextexpirydate1 .getText().toString());
                         if(isAdded = true)
                             Toast.makeText(payment.this, "Data Inserted", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(payment.this, "Data Not Inserted", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
+
+
                 }
-
         );
-
    }
+
+
+
+
 
 
 

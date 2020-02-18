@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -59,6 +64,7 @@ public class profile extends AppCompatActivity {
     public ImageButton imageViewcalendar;
     public Button Savebutton;
     boolean isInserted;
+    AwesomeValidation awesomeValidation;
 
     //Calendar
 
@@ -74,6 +80,8 @@ public class profile extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         super.onCreate(savedInstanceState);
         MyDataBase = new DataBaseHelper(this);
         setContentView(R.layout.profile_page);
@@ -160,8 +168,9 @@ public class profile extends AppCompatActivity {
                     public void onClick(View v) {
                         byte[] UserImage = imageViewToByte(imageViewcamera);
                         // to open camera
-                      
+
                         AddProfile(UserImage);
+
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(intent, 100);
                     }
@@ -174,32 +183,80 @@ public class profile extends AppCompatActivity {
                     {
                       Bitmap bitmap = ((BitmapDrawable) imageViewcamera.getDrawable()).getBitmap();
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG,256,stream);
+                        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
                         byte[] byteArray = stream.toByteArray();
                         return byteArray;
                     }
                 });
 
         AddDetails();
+        Validations();
 
-
+    }
+    private void Validations(){
+        awesomeValidation.addValidation(profile.this,R.id.imageViewcamera,RegexTemplate.NOT_EMPTY,R.string.Picture_Error);
+        awesomeValidation.addValidation(profile.this,R.id.editTextfirstname,"[a-zA-Z\\s]+",R.string.firstName_Error);
+        awesomeValidation.addValidation(profile.this,R.id.editTextlastname,"[a-zA-Z\\s]+",R.string.LastName_Error);
+        awesomeValidation.addValidation(profile.this,R.id.editTextemailid, Patterns.EMAIL_ADDRESS,R.string.Email_Error);
+        awesomeValidation.addValidation(profile.this,R.id.editTextcontact, RegexTemplate.TELEPHONE,R.string.Contact_Error);
+        awesomeValidation.addValidation(profile.this,R.id.dobedittext,RegexTemplate.NOT_EMPTY,R.string.DOB_Error);
     }
 
 
-    //method for save button
+//public boolean validation(EditText editTextemailid, EditText editTextfirstname,EditText editTextlastname,EditText editTextcontact, EditText dobedittext) {
+//    String emailInput = editTextemailid.getText().toString();
+//    String FNameInput = editTextfirstname.getText().toString();
+//    String LNameInput = editTextlastname.getText().toString();
+//    String contactInput = editTextcontact.getText().toString();
+//    String DOBInput = dobedittext.getText().toString();
+//    if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+//        Toast.makeText(this, "Email Valid", Toast.LENGTH_LONG).show();
+//        return true;
+//    }
+//
+//
+//    if (FNameInput.isEmpty()) {
+//        Toast.makeText(profile.this, "Enter First Name", Toast.LENGTH_SHORT).show();
+//        return true;
+//    }
+//
+//    if (LNameInput.isEmpty()) {
+//        Toast.makeText(profile.this, "Enter Last Name", Toast.LENGTH_SHORT).show();
+//        return true;
+//    }
+//    if (!contactInput.isEmpty() && Patterns.PHONE.matcher(contactInput).matches()) {
+//        return true;
+//    }
+//    if (!DOBInput.isEmpty()) {
+//        return true;
+//    } else {
+//        Toast.makeText(profile.this, "Enter All Fields with Valid Details", Toast.LENGTH_SHORT).show();
+//        return true;
+//    }
+
+//
+//
+//}
+
+//method for save button
     public void AddDetails() {
         Savebutton.setOnClickListener(
-                 new View.OnClickListener() {
+                new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (awesomeValidation.validate()) {
+                            MyDataBase.insertData(editTextfirstname.getText().toString(), editTextlastname.getText().toString(), editTextcontact.getText().toString(), editTextemailid.getText().toString(), dobedittext.getText().toString());
 
-                        MyDataBase.insertData(editTextfirstname.getText().toString(), editTextlastname.getText().toString(), editTextcontact.getText().toString(), editTextemailid.getText().toString(), dobedittext.getText().toString());
+                            if (isInserted = true)
+                                Toast.makeText(profile.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(profile.this, "Data Not Inserted", Toast.LENGTH_SHORT).show();
 
-                        if (isInserted = true)
-                            Toast.makeText(profile.this, "Data Inserted", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(profile.this, "Data Not Inserted", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
+
 
                 }
         );

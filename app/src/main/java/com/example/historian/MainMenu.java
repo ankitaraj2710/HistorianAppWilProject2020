@@ -38,7 +38,9 @@ public class MainMenu extends Fragment {
         museum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), museum.class);
+
+
+                Intent in = new Intent(getActivity(), Demo.class);
                 startActivity(in);
             }
 
