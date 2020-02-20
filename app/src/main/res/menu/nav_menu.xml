@@ -3,7 +3,8 @@
 
     <item
         android:id="@+id/menupage"
-        android:title="Menu Page">
+        android:title="Menu Page"
+       >
 
     </item>
 

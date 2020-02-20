@@ -77,8 +77,8 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
     }
 private void CheckValidData(){
     awesomeValidation.addValidation(payment.this,R.id.editTextName, "[a-zA-Z\\s]+",R.string.NameOnCard_Error);
-    awesomeValidation.addValidation(payment.this,R.id.editTextcardnumber,RegexTemplate.NOT_EMPTY,R.string.CardNumber_Error);
-    awesomeValidation.addValidation(payment.this,R.id.editTextcvv,RegexTemplate.NOT_EMPTY,R.string.CVV_Error);
+    awesomeValidation.addValidation(payment.this,R.id.editTextcardnumber,"[^4[0-9]{12}(?:[0-9]{3})?$]",R.string.CardNumber_Error);
+    awesomeValidation.addValidation(payment.this,R.id.editTextcvv,"([0-9]|[0-9]|[0-9])",R.string.CVV_Error);
     awesomeValidation.addValidation(payment.this,R.id.editTextexpirydate, RegexTemplate.NOT_EMPTY,R.string.ExpiryDate_Error);
 
 }

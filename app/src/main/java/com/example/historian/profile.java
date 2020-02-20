@@ -198,8 +198,8 @@ public class profile extends AppCompatActivity {
         awesomeValidation.addValidation(profile.this,R.id.editTextfirstname,"[a-zA-Z\\s]+",R.string.firstName_Error);
         awesomeValidation.addValidation(profile.this,R.id.editTextlastname,"[a-zA-Z\\s]+",R.string.LastName_Error);
         awesomeValidation.addValidation(profile.this,R.id.editTextemailid, Patterns.EMAIL_ADDRESS,R.string.Email_Error);
-        awesomeValidation.addValidation(profile.this,R.id.editTextcontact, RegexTemplate.TELEPHONE,R.string.Contact_Error);
-        awesomeValidation.addValidation(profile.this,R.id.dobedittext,RegexTemplate.NOT_EMPTY,R.string.DOB_Error);
+        awesomeValidation.addValidation(profile.this,R.id.editTextcontact, Patterns.PHONE,R.string.Contact_Error);
+        awesomeValidation.addValidation(profile.this,R.id.dobedittext,RegexTemplate.NOT_EMPTY ,R.string.DOB_Error);
     }
 
 

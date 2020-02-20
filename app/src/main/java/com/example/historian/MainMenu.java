@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,7 +16,7 @@ public class MainMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fisrt, container, false);
 
-        Button profile = (Button) view.findViewById(R.id.profile);
+        ImageButton profile = (ImageButton) view.findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,7 +25,7 @@ public class MainMenu extends Fragment {
             }
 
         });
-        Button payment = (Button) view.findViewById(R.id.payment);
+        ImageButton payment = (ImageButton) view.findViewById(R.id.payment);
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +34,7 @@ public class MainMenu extends Fragment {
             }
 
         });
-        Button museum = (Button) view.findViewById(R.id.museum);
+        ImageButton museum = (ImageButton) view.findViewById(R.id.museum);
         museum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
