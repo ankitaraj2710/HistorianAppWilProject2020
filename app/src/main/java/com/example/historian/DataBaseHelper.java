@@ -2,8 +2,10 @@ package com.example.historian;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String DataBaseName = "PaymentDetail.db";
@@ -22,6 +24,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String column8 = "CVV";
     public static final String column9 = "ExpiryDate";
     public static final String column0 = "UserImage";
+    public static final String column01 = "id";
+    SQLiteDatabase db = this.getWritableDatabase();
+    String dbId;
+
 
     public DataBaseHelper(Context context) {
         super(context, DataBaseName, null, 2);
@@ -29,15 +35,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String Payment_Detail = "CREATE TABLE " + TableName + " (CardName TEXT,CardNumber INTEGER,CVV INTEGER,ExpiryDate INTEGER) ";
+        String Payment_Detail = "CREATE TABLE " + TableName + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,CardName TEXT,CardNumber INTEGER,CVV INTEGER,ExpiryDate INTEGER) ";
 
 
-        String User_Detail = "CREATE TABLE " + Table_Name + "(UserName TEXT,UserLastName TEXT,UserContact INTEGER,UserEmailID TEXT,UserDOB INTEGER)";
+        String User_Detail = "CREATE TABLE " + Table_Name + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,UserName TEXT,UserLastName TEXT,UserContact INTEGER,UserEmailID TEXT UNIQUE,UserDOB INTEGER)";
 
-        String User_image = "CREATE TABLE " + Table_Name1 + " (userImage image) ";
+        String User_image = "CREATE TABLE " + Table_Name1 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,userImage image) ";
         sqLiteDatabase.execSQL(Payment_Detail);
         sqLiteDatabase.execSQL(User_Detail);
         sqLiteDatabase.execSQL(User_image);
+
 
     }
 
@@ -55,10 +62,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return true;
     }
 //
+
 //Create insert method
 
     public boolean insertData(String fname, String Lname, String contact, String  email, String DOB){
-        SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues contentValues1 = new ContentValues();
 
         contentValues1.put(column1, fname);
@@ -66,10 +74,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues1.put(column3, contact);
         contentValues1.put(column4, email);
         contentValues1.put(column5, DOB);
-        db.insert(Table_Name,null,contentValues1);
+
+      db.insert(Table_Name,null,contentValues1);
+
         return false;
     }
 
+
+
+//    public boolean insertData(String fname, String Lname, String contact, String  email, String DOB){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues1 = new ContentValues();
+//
+//        contentValues1.put(column1, fname);
+//        contentValues1.put(column2, Lname);
+//        contentValues1.put(column3, contact);
+//        contentValues1.put(column4, email);
+//        contentValues1.put(column5, DOB);
+//
+//        db.insert(Table_Name,null,contentValues1);
+//        return false;
+//    }
 
 
     //Create insert method
@@ -86,7 +111,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //Insert Data into Database
         db.insert(TableName, null, contentValues);
-return  false;
+       return  false;
+    }
+
+
+    public boolean updateData(String firstName,String lastName,String contact,String emailID,String dob){
+//        Cursor cursor = ViewData();
+//           dbId = cursor.getString(0);
+           dbId = "1";
+            SQLiteDatabase db = this.getReadableDatabase();
+            ContentValues contentValues2 = new ContentValues();
+            contentValues2.put(column1, firstName);
+            contentValues2.put(column2, lastName);
+            contentValues2.put(column3, contact);
+            contentValues2.put(column4, emailID);
+            contentValues2.put(column5, dob);
+            db.update(Table_Name, contentValues2, "ID = ?", new String[]{dbId});
+
+        return true;
+    }
+    public void DisplayWElcomeName(TextView textView)
+    {
+
+      Cursor cr = this.getReadableDatabase().rawQuery("select * from "+ Table_Name,null);
+     textView.setText("");
+      while(cr.moveToNext()){
+          textView.append(cr.getString(1));
+
+      }
+    }
+
+
+    public Cursor ViewData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor =  db.rawQuery("select * from  "+Table_Name+" where ID = 1",null);
+
+        return cursor;
+
     }
 
 }

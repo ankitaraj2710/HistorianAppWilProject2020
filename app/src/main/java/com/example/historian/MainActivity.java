@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     public Button find;
+
+    DataBaseHelper MyDataBase;
+
+
     //EditText firstname,contact,lastname,emailid,dob;
    // Button Save;
     GoogleMap map;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     FusedLocationProviderClient fusedLocationProviderClient;
     //Databae instance
     //DataBase MyDataBase;
+
     private  static final int REQUEST_CODE = 101;
 
     @Override
@@ -54,9 +59,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
 
         //Call Constructer for database
-         // MyDataBase = new DataBase(this);
+        // MyDataBase = new DataBase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyDataBase = new DataBaseHelper(this);
+        //Menu menu = findViewById(R.id.viewrecord);
 
         //profile page edittext and button
 //        firstname = (EditText)findViewById(R.id.editTextfirstname);
@@ -95,6 +102,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchlastlocation();
 
+        MyDataBase.insertData("Amrik", "Sidhu", "1234567899", "amrik@gmail.com", "01/10/1234");
+
 
     }
 
@@ -125,21 +134,20 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 switch (menuItem.getItemId()){
     case R.id.menupage:
         getSupportFragmentManager().beginTransaction().replace(R.id.ham, new MainMenu()).addToBackStack(null).commit();
         break;
-//    case R.id.Menu:
+
+
+//    case R.id.viewrecord:
+//        getSupportFragmentManager().beginTransaction().replace(R.id.readData,new MainMenu()).addToBackStack(null).commit();
+//         break;
+//    c
+//    ase R.id.Menu:
 //        getSupportFragmentManager().beginTransaction().replace(R.id.ham, new menuPage()).commit();
 //        break;
 
@@ -148,10 +156,18 @@ switch (menuItem.getItemId()){
         return true;
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_menu,menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
