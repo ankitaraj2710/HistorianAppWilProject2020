@@ -27,9 +27,6 @@
             android:layout_width="371dp"
             android:layout_height="541dp"
             android:layout_marginStart="34dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toTopOf="@+id/find"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +50,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="#ccedd2">
 
         </Button>
 
@@ -65,7 +63,8 @@
         android:layout_height="match_parent"
         app:menu="@menu/nav_menu"
         android:layout_gravity="start"
-        android:background="@color/yello">
+        android:background="#effcef">
+        //android:background="#effcef">
 
     </com.google.android.material.navigation.NavigationView>
 

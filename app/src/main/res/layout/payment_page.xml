@@ -1,163 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background">
+    android:orientation="vertical"
+    android:background="#effcef"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="542dp"-->
+    <!--        android:layout_margin="30dp"-->
+    <!--        app:cardBackgroundColor="#757575"-->
+    <!--        app:cardCornerRadius="4dp">-->
 
 
     <TextView
         android:id="@+id/welcometextview"
-        android:layout_width="222dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="201dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:text="Please enter your credit card information below"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.348"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="#655c56"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/etstyle"
+        android:ems="10"
+        android:hint="Cardholder Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextcardnumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/etstyle"
+        android:ems="10"
+        android:hint="Card Number"
+        android:inputType="phone" />
+
+
+    <EditText
+        android:id="@+id/editTextcvv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/etstyle"
+        android:ems="10"
+        android:hint="CVV"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/editTextexpirydate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/etstyle"
+        android:ems="10"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Expiry Date"
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/SaveDetail"
         android:layout_width="198dp"
         android:layout_height="51dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="109dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/etstyle"
+        android:backgroundTint="#ccedd2"
         android:text="SAVE"
-        android:background="@color/yello"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calimageView" />
-
-    <TextView
-        android:id="@+id/nametextview"
-        android:layout_width="217dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="213dp"
-        android:text="Name on card"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcometextview" />
-
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="217dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="182dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nametextview" />
-
-    <TextView
-        android:id="@+id/cardnumbertextview"
-        android:layout_width="217dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="213dp"
-        android:text="Card Number"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
-
-    <EditText
-        android:id="@+id/editTextcardnumber"
-        android:layout_width="220dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="182dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardnumbertextview" />
+        android:textColor="@color/cardview_dark_background"
+        android:textStyle="bold" />
 
 
-    <TextView
-        android:id="@+id/cvvtextview"
-        android:layout_width="218dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="213dp"
-        android:text="CVV"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextcardnumber" />
 
-    <EditText
-        android:id="@+id/editTextcvv"
-        android:layout_width="218dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="182dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvvtextview" />
-
-    <TextView
-        android:id="@+id/expirydatetextview"
-        android:layout_width="220dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="213dp"
-        android:text="Expiry Date"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextcvv" />
-
-    <EditText
-        android:id="@+id/editTextexpirydate"
-        android:layout_width="159dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="15dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toStartOf="@+id/calimageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expirydatetextview" />
-
-    <ImageButton
-        android:id="@+id/calimageView"
-        android:layout_width="43dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="178dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expirydatetextview"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

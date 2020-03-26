@@ -67,7 +67,7 @@ public class museum extends AppCompatActivity implements NavigationView.OnNaviga
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(museum.this, ReviewPage.class);
+                Intent intent = new Intent(museum.this,payment.class);
                 startActivity(intent);
             }
         });
@@ -99,7 +99,7 @@ public class museum extends AppCompatActivity implements NavigationView.OnNaviga
         int id = menuItem.getItemId();
         if (id == R.id.menupage)
         {
-            Intent intent = new Intent(museum.this, MainMenu.class);
+            Intent intent = new Intent(museum.this, MenuPage.class);
             startActivity(intent);
 
             Toast.makeText(this, "This is Main Menu Page", Toast.LENGTH_SHORT).show();

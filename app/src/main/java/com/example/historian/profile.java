@@ -1,7 +1,6 @@
 package com.example.historian;
 
 import android.Manifest;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,13 +40,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import ru.slybeaver.slycalendarview.SlyCalendarDialog;
 
-public class profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SlyCalendarDialog.Callback {
 
     DataBaseHelper MyDataBase;
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    int REQUEST_CAMERA = 1, SELECT_FILE = 0;
 
     public TextView welcometextview;
     public TextView profilepicturetextview;
@@ -74,7 +74,7 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
 
     boolean isInserted;
     AwesomeValidation awesomeValidation;
-    int Status = 0;
+
     //Calendar
 
     Calendar myCalendar;
@@ -90,7 +90,7 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
 
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         super.onCreate(savedInstanceState);
         MyDataBase = new DataBaseHelper(this);
@@ -100,89 +100,73 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
         profilepicturetextview = (TextView) findViewById(R.id.profilepicturetextview);
         imageViewcamera = (ImageView) findViewById(R.id.imageViewcamera);
 
-        firstnametextview = (TextView) findViewById(R.id.firstnametextview);
+        //firstnametextview = (TextView) findViewById(R.id.firstnametextview);
         editTextfirstname = (EditText) findViewById(R.id.editTextfirstname);
 
-        lastnametextview = (TextView) findViewById(R.id.lastnametextview);
+        //lastnametextview = (TextView) findViewById(R.id.lastnametextview);
         editTextlastname = (EditText) findViewById(R.id.editTextlastname);
 
-        contacttextview = (TextView) findViewById(R.id.contacttextview);
+        //contacttextview = (TextView) findViewById(R.id.contacttextview);
         editTextcontact = (EditText) findViewById(R.id.editTextcontact);
 
-        emailidtextview = (TextView) findViewById(R.id.emailidtextview);
+        // emailidtextview = (TextView) findViewById(R.id.emailidtextview);
         editTextemailid = (EditText) findViewById(R.id.editTextemailid);
 
-        dobtextview = (TextView) findViewById(R.id.dobtextview);
+        // dobtextview = (TextView) findViewById(R.id.dobtextview);
         dobedittext = (EditText) findViewById(R.id.dobedittext);
-        imageViewcalendar = (ImageButton) findViewById(R.id.imageViewcalendar);
-        Savebutton = (Button) findViewById(R.id.SaveDetail);
+        //imageViewcalendar = (ImageButton) findViewById(R.id.imageViewcalendar);
+        Savebutton = (Button) findViewById(R.id.Savebutton);
 
 
         myCalendar = (Calendar) Calendar.getInstance();
         startDate = (Calendar) Calendar.getInstance();
-        imageViewcalendar.setOnClickListener(new View.OnClickListener() {
+
+
+        //FOR CALENDER VIEW
+        dobedittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        myCalendar.set(Calendar.YEAR, year);
-                        myCalendar.set(Calendar.MONTH, month);
-                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                        if (start_or_end == 1) {
-                            startDate.set(Calendar.YEAR, year);
-                            startDate.set(Calendar.MONTH, month);
-                            startDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                            dobedittext.setText(sdf.format(myCalendar.getTime()));
-                        } else {
-
-                        }
-
-                    }
-                };
-
-
-                dobedittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (hasFocus) {
-                            start_or_end = 1;
-                            DatePickerDialog dialog = new DatePickerDialog(profile.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
-                            dialog.show();
-
-                        } else {
-
-                        }
-                    }
-                });
-
-
+                Toast.makeText(profile.this, "Onclick", Toast.LENGTH_SHORT).show();
+                new SlyCalendarDialog()
+                        .setSingle(false)
+                        .setCallback(profile.this)
+                        .show(getSupportFragmentManager(), "TAG_SLYCALENDAR");
             }
         });
 
 
-        //Request For Camera permission
-        if (ContextCompat.checkSelfPermission(profile.this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(profile.this,
-                    new String[]{
-                            Manifest.permission.CAMERA
-                    },
-                    100);
-
-        }
         imageViewcamera.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Request For Camera permission
+                        if (ContextCompat.checkSelfPermission(profile.this,
+                                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(profile.this,
+                                    new String[]{
+                                            Manifest.permission.CAMERA
+                                    },
+                                    100);
+
+                        }
+
                         byte[] UserImage = imageViewToByte(imageViewcamera);
                         // to open camera
 
-                        AddProfile(UserImage);
+                        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                        getIntent.setType("image/*");
+
+                        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        pickIntent.setType("image/*");
+
 
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, 100);
+
+                        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image from");
+                        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent, intent});
+
+                        startActivityForResult(chooserIntent, 100);
+                        AddProfile(UserImage);
                     }
 
                     private void AddProfile(byte[] UserImage) {
@@ -211,6 +195,7 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
         awesomeValidation.addValidation(profile.this, R.id.editTextcontact, Patterns.PHONE, R.string.Contact_Error);
         awesomeValidation.addValidation(profile.this, R.id.dobedittext, RegexTemplate.NOT_EMPTY, R.string.DOB_Error);
     }
+
     //method for save button
     public void AddDetails() {
         Savebutton.setOnClickListener(
@@ -218,18 +203,15 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
                     @Override
                     public void onClick(View v) {
 
-                                if (awesomeValidation.validate()) {
+                        if (awesomeValidation.validate()) {
 
-
-                                        MyDataBase.updateData(editTextfirstname.getText().toString(), editTextlastname.getText().toString(), editTextcontact.getText().toString(), editTextemailid.getText().toString(), dobedittext.getText().toString());
-                                        MyDataBase.DisplayWElcomeName(welcometextview);
-                                        Toast.makeText(profile.this, "Data updated", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                else{
-                                        Toast.makeText(profile.this, "Problem", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                            MyDataBase.updateData(editTextfirstname.getText().toString(), editTextlastname.getText().toString(), editTextcontact.getText().toString(), editTextemailid.getText().toString(), dobedittext.getText().toString());
+                            MyDataBase.DisplayWElcomeName(welcometextview);
+                            Toast.makeText(profile.this, "Data updated", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(profile.this, "Data Not Updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
         );
     }
@@ -238,20 +220,45 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            //get image capture
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
-            //set captured image to imageView
-            imageViewcamera.setImageBitmap(captureImage);
-            Uri selectedImageUri = data.getData();
-            imageViewcamera.setImageURI(selectedImageUri);
-        }
+        if (data != null) {
+            if (requestCode == 100) {
+                //get image capture
+                Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+                //set captured image to imageView
+                imageViewcamera.setImageBitmap(captureImage);
+                Uri selectedImageUri = data.getData();
+                imageViewcamera.setImageURI(selectedImageUri);
+            }
 
+        }
     }
+
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        String stateSaved = savedInstanceState.getString("Saved_state");
+        if(stateSaved==null){
+            Toast.makeText(profile.this,"OnRestoreInstanceState:\n"+"NO state saved",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(profile.this,"OnRestoreInstanceState:\n"+"saved state="+stateSaved,Toast.LENGTH_LONG).show();
+            editTextfirstname.setText(stateSaved);
+            editTextlastname.setText(stateSaved);
+            editTextcontact.setText(stateSaved);
+            editTextemailid.setText(stateSaved);
+            dobedittext.setText(stateSaved);
+
+        }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        String stateToSave = editTextfirstname.getText().toString();
+        outState.putString("saved_state", stateToSave);
+        Toast.makeText(profile.this,"onSaveInstanceState:\n"+"saved_state = "+stateToSave,Toast.LENGTH_LONG).show();
+
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -271,6 +278,11 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
                 stringBuffer.append("Contact : " + cursor.getString(3) + "\n");
                 stringBuffer.append("Email : " + cursor.getString(4) + "\n");
                 stringBuffer.append("DOB : " + cursor.getString(5) + "\n\n");
+//                stringBuffer.append("ID" + cursor.getString(6)+"\n");
+//                stringBuffer.append("Name" +cursor.getString(7)+"\n");
+//                stringBuffer.append("CardNumber"+ cursor.getString(8)+"\n");
+//                stringBuffer.append("CVV"+cursor.getString(9)+"\n");
+//                stringBuffer.append("ExpiryDate"+cursor.getString(10)+"\n");
             }
             ShowData("Profile Data", stringBuffer.toString());
         }
@@ -302,10 +314,26 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
         int id = menuItem.getItemId();
         if(id == R.id.menupage)
         {
-            Intent intent = new Intent(profile.this, MainMenu.class);
+            Intent intent = new Intent(profile.this, MenuPage.class);
             startActivity(intent);
         }
         return false;
     }
 
+    @Override
+    public void onCancelled() {
+
+    }
+
+    @Override
+    public void onDataSelected(Calendar firstDate, Calendar secondDate, int hours, int minutes) {
+        if(firstDate!=null){
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            dobedittext.setText(dateFormat.format((firstDate.getTime())));
+            //Toast.makeText(this,  dateFormat.format(firstDate.getTime()), Toast.LENGTH_SHORT).show();
+        }
+        //  Toast.makeText(Profile.this, firstDate.toString(), Toast.LENGTH_SHORT).show();
+
+
+    }
 }

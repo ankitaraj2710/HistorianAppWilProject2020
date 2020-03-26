@@ -1,6 +1,7 @@
 package com.example.historian;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -101,10 +102,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         //Current Location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchlastlocation();
+        //call insert method from profile page
+        MyDataBase.insertData("Ankitraj", "Kaur", "43722536", "ankita@gmail.com", "25/11/1994");
 
-        MyDataBase.insertData("Amrik", "Sidhu", "1234567899", "amrik@gmail.com", "01/10/1234");
-
-
+      MyDataBase.insertDetail("Ankitraj_Kaur","4523-3233-4674-4747","232","12/25");
     }
 
 
@@ -132,31 +133,52 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
 
 
-
-
-
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-switch (menuItem.getItemId()){
-    case R.id.menupage:
-        getSupportFragmentManager().beginTransaction().replace(R.id.ham, new MainMenu()).addToBackStack(null).commit();
-        break;
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+    {
+        int id = menuItem.getItemId();
+        if (id == R.id.menupage)
+        {
+
+//            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,new MenuPage()).addToBackStack(null).commit();
+            Intent intent = new Intent(MainActivity.this, MenuPage.class);
+            startActivity(intent);
+//
+//            Toast.makeText(this, "This is Menu Page", Toast.LENGTH_SHORT).show();
+
+        }
 
 
-//    case R.id.viewrecord:
-//        getSupportFragmentManager().beginTransaction().replace(R.id.readData,new MainMenu()).addToBackStack(null).commit();
-//         break;
-//    c
-//    ase R.id.Menu:
-//        getSupportFragmentManager().beginTransaction().replace(R.id.ham, new menuPage()).commit();
-//        break;
-
-}
         drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+
+        return false;
 
     }
-    @Override
+
+
+
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//switch (menuItem.getItemId()){
+//    case R.id.menupage:
+//        getSupportFragmentManager().beginTransaction().replace(R.id.ham, new MenuPage()).addToBackStack(null).commit();
+//        break;
+//
+//
+////    case R.id.viewrecord:
+////        getSupportFragmentManager().beginTransaction().replace(R.id.readData,new MainMenu()).addToBackStack(null).commit();
+////         break;
+////    c
+////    ase R.id.Menu:
+////        getSupportFragmentManager().beginTransaction().replace(R.id.ham, new menuPage()).commit();
+////        break;
+//
+//}
+//        drawerLayout.closeDrawer(GravityCompat.START);
+//        return true;
+//
+//    }
+//    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(actionBarDrawerToggle.onOptionsItemSelected(item)){
             return true;

@@ -4,12 +4,13 @@
     package="com.example.historian">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name=".App" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <dist:module dist:instant="true" />
 
@@ -31,16 +32,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".profile"></activity>
-        <activity android:name=".payment"></activity>
-        <activity android:name=".museum"></activity>
-        <activity android:name=".ReviewPage"></activity>
-        <activity android:name=".Demo"/>
-        <activity android:name=".Myadapter"/>
-        <activity android:name=".Listitem"/>
+        <activity android:name=".profile" />
+        <activity android:name=".payment" />
+        <activity android:name=".museum" />
 
+        <activity android:name=".bookTicket"></activity>
+        <activity android:name=".Demo" />
+        <activity android:name=".Myadapter" />
+        <activity android:name=".Listitem" />
+        <activity android:name=".Pagereviewlistitem" />
+        <activity android:name=".MenuPage"/>
 
     </application>
 

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -61,14 +64,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(Table_Name1,null,contentValues0);
         return true;
     }
-//
-
-//Create insert method
+    // Create a method to retrieve image from database
+    public Bitmap getImage(ImageView id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Bitmap bt = null;
+        Cursor cursor = db.rawQuery("select * from " + Table_Name1 + " where id = ?", new String[]{String.valueOf(id)});
+        if (cursor.moveToNext()) {
+            byte[] image = cursor.getBlob(1);
+            bt = BitmapFactory.decodeByteArray(image, 0, image.length);
+        }
+        return bt;
+    }
+     //Create insert method for user's profile
 
     public boolean insertData(String fname, String Lname, String contact, String  email, String DOB){
 
         ContentValues contentValues1 = new ContentValues();
-
         contentValues1.put(column1, fname);
         contentValues1.put(column2, Lname);
         contentValues1.put(column3, contact);
@@ -80,24 +91,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-
-
-//    public boolean insertData(String fname, String Lname, String contact, String  email, String DOB){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues1 = new ContentValues();
-//
-//        contentValues1.put(column1, fname);
-//        contentValues1.put(column2, Lname);
-//        contentValues1.put(column3, contact);
-//        contentValues1.put(column4, email);
-//        contentValues1.put(column5, DOB);
-//
-//        db.insert(Table_Name,null,contentValues1);
-//        return false;
-//    }
-
-
-    //Create insert method
+    //Create insert method for payment detail
     public boolean insertDetail(String cardname, String cardnum, String cvv, String expirydate) {
         // get writable Database
         SQLiteDatabase db = this.getWritableDatabase();
@@ -113,7 +107,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(TableName, null, contentValues);
        return  false;
     }
-
+    //this an update method for updating details for user profile
 
     public boolean updateData(String firstName,String lastName,String contact,String emailID,String dob){
 //        Cursor cursor = ViewData();
@@ -130,10 +124,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+
+    //this is an update method for payment details
+
+    public boolean updatePaymentDetail(String cardName,String cardNumber,String cvv,String expiryDate){
+        dbId="1";
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues3 = new ContentValues();
+        contentValues3.put(column6, cardName);
+        contentValues3.put(column7, cardNumber);
+        contentValues3.put(column8,cvv);
+        contentValues3.put(column9,expiryDate);
+        db.update(TableName,contentValues3,"ID=?",new String[]{dbId});
+        return true;
+    }
+
     public void DisplayWElcomeName(TextView textView)
     {
 
-      Cursor cr = this.getReadableDatabase().rawQuery("select * from "+ Table_Name,null);
+      Cursor cr = this.getReadableDatabase().rawQuery("select * from "+ Table_Name+" where ID = 1",null);
      textView.setText("");
       while(cr.moveToNext()){
           textView.append(cr.getString(1));
@@ -149,6 +158,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return cursor;
 
+    }
+    public Cursor getData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from "+TableName+" where ID = 1",null);
+        return cursor;
     }
 
 }
