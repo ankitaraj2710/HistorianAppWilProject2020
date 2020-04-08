@@ -15,6 +15,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TableName = "Payment_Detail";
     public static final String Table_Name = "User_Detail";
     public static final String Table_Name1 = "User_image";
+    public static final String Table_Ticket = "Ticket_Detail";
     //public static final  String Table_Name1 = "Payment_Detail";
 
     public static final String column1 = "UserName";
@@ -28,6 +29,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String column9 = "ExpiryDate";
     public static final String column0 = "UserImage";
     public static final String column01 = "id";
+    public static final String column10 = "museumName";
+    public static final String column11 = "noOfTickets";
+    public static final String column12 = "date";
+    public static final String column13 = "time";
     SQLiteDatabase db = this.getWritableDatabase();
     String dbId;
 
@@ -44,9 +49,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String User_Detail = "CREATE TABLE " + Table_Name + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,UserName TEXT,UserLastName TEXT,UserContact INTEGER,UserEmailID TEXT UNIQUE,UserDOB INTEGER)";
 
         String User_image = "CREATE TABLE " + Table_Name1 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,userImage image) ";
+
+        String Ticket_Detail = "CREATE TABLE " + Table_Ticket + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, museumName TEXT, noOfTickets INTEGER, date INTEGER, time INTEGER)";
         sqLiteDatabase.execSQL(Payment_Detail);
         sqLiteDatabase.execSQL(User_Detail);
         sqLiteDatabase.execSQL(User_image);
+        sqLiteDatabase.execSQL(Ticket_Detail);
+
 
 
     }
@@ -107,6 +116,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(TableName, null, contentValues);
        return  false;
     }
+
+    // create method to insert ticket details in database
+    public  boolean insertTicketDetail(String museumname, int noOftickets, String Date, String Time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues4 = new ContentValues();
+        contentValues4.put(column10,museumname);
+        contentValues4.put(column11,noOftickets);
+        contentValues4.put(column12,Date);
+        contentValues4.put(column13,Time);
+
+        //insert data to database
+        db.insert(Table_Ticket,null,contentValues4);
+        return false;
+    }
     //this an update method for updating details for user profile
 
     public boolean updateData(String firstName,String lastName,String contact,String emailID,String dob){
@@ -138,6 +161,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(TableName,contentValues3,"ID=?",new String[]{dbId});
         return true;
     }
+
+
 
     public void DisplayWElcomeName(TextView textView)
     {
