@@ -30,7 +30,10 @@
     <string name="CardNumber_Error">Enter Card Number</string>
     <string name="CVV_Error">Enter CVV</string>
     <string name="ExpiryDate_Error">Enter Expiry Date</string>
-
+    //error messages for bookTicket page
+    <string name="EnterNumberOfTicket"> Please Enter Number Of Ticket</string>
+    <string name="EnterDate"> Please Enter Date</string>
+    <string name="EnterTime"> Please Enter Time</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

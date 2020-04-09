@@ -7,29 +7,28 @@
     android:layout_centerHorizontal="true"
     android:background="#effcef"
     android:orientation="vertical">
-
-    <!--    <androidx.cardview.widget.CardView-->
-
-    <!--        android:background="@color/cardview_shadow_start_color"-->
-    <!--        android:layout_margin="30dp"-->
-    <!--        app:cardCornerRadius="4dp"-->
-    <!--        app:cardBackgroundColor="#757575"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content">-->
-
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Welcome"
+        android:textColor="#655c56"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/welcometextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="10dp"
-        android:text="Welcome "
+        android:layout_marginLeft="162dp"
+        android:layout_marginTop="-40dp"
+        android:text=" "
         android:textColor="#655c56"
         android:textSize="30sp"
         android:textStyle="bold" />
-
     <TextView
         android:id="@+id/profilepicturetextview"
         android:layout_width="wrap_content"

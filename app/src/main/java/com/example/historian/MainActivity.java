@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MyDataBase = new DataBaseHelper(this);
-        //Menu menu = findViewById(R.id.viewrecord);
-
+        //Menu menu = findViewById(R.id.viewrecord); rukja
+ // emulator kithe aa ? hun kita run
         //profile page edittext and button
 //        firstname = (EditText)findViewById(R.id.editTextfirstname);
 //        lastname = (EditText)findViewById(R.id.editTextlastname);
