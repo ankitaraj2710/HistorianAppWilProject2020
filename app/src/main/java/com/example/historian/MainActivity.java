@@ -64,26 +64,13 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MyDataBase = new DataBaseHelper(this);
-        //Menu menu = findViewById(R.id.viewrecord); rukja
- // emulator kithe aa ? hun kita run
-        //profile page edittext and button
-//        firstname = (EditText)findViewById(R.id.editTextfirstname);
-//        lastname = (EditText)findViewById(R.id.editTextlastname);
-//        contact =  (EditText)findViewById(R.id.editTextcontact);
-//        emailid = (EditText)findViewById(R.id.editTextemailid);
-//        dob = (EditText)findViewById(R.id.dobedittext);
-//        Save = (Button)findViewById(R.id.Savebutton);
-
         find = (Button)findViewById(R.id.find);
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getBaseContext(), "Button Clicked!" , Toast.LENGTH_SHORT ).show();
                 fetchlastlocation();
             }
         });
-
-
         drawerLayout = (DrawerLayout) findViewById(R.id.ham);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -93,11 +80,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
 
         //Current Location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);

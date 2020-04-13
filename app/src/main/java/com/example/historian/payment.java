@@ -1,6 +1,7 @@
 package com.example.historian;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import ru.slybeaver.slycalendarview.SlyCalendarDialog;
@@ -138,11 +140,36 @@ public class payment extends AppCompatActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.viewrecord)
+        {
+            Cursor cursor1 = MyDataBase1.getData();
+            if (cursor1.getCount() == 0)
+            {
+                AppealData("Error","Nothing Found");
+            }
+            StringBuffer stringBuffer = new StringBuffer();
+            while (cursor1.moveToNext())
+            {
+                stringBuffer.append("ID: " + cursor1.getString(0) + "\n");
+                stringBuffer.append("CARDHOLDER NAME:" +cursor1.getString(1) + "\n");
+                stringBuffer.append("CARD NUMBER:" +cursor1.getString(2) +"\n");
+                stringBuffer.append("CVV:" + cursor1.getString(3) +"\n");
+                stringBuffer.append("EXPIRY DATE:" +cursor1.getString(4) +"\n");
+            }
+            AppealData("Payment Data", stringBuffer.toString());
 
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public void AppealData(String title, String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 
 

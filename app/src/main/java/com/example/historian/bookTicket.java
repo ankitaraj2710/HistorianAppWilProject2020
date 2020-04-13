@@ -3,6 +3,7 @@ package com.example.historian;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.bumptech.glide.Glide;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -28,10 +30,10 @@ public class bookTicket extends AppCompatActivity implements SlyCalendarDialog.C
     public LinearLayout linearLayout;
     public ImageView imageView;
     public TextView textView;
-    public TextView textView1;
-    public TextView textView2;
+    public EditText text1;
+    public EditText text2;
+
     TextView textView3;
-    TextView text;
     TextView museumname;
     ImageView image;
     Button button;
@@ -41,39 +43,30 @@ public class bookTicket extends AppCompatActivity implements SlyCalendarDialog.C
     int Year, Month, Day, Hour, Minute;
     Calendar calendar ;
     AwesomeValidation awesomeValidation;
-
-    public void setIs24HourView(Boolean is24HourView) {
-
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booktickets);
         mydatabase = new DataBaseHelper(this);
         Calendar now = Calendar.getInstance();
-        textView = (TextView)findViewById(R.id.textView);
-        textView1 = (TextView)findViewById(R.id.time);
 
-        textView2 = (TextView) findViewById(R.id.date);
+        text1 = (EditText) findViewById(R.id.time);
+        text2 = (EditText) findViewById(R.id.date);
         textView3 = (TextView) findViewById(R.id.textView3);
         museumname = (TextView) findViewById(R.id.musuemname);
         image = (ImageView) findViewById(R.id.image);
-        button = (Button)findViewById(R.id.Confirmbtn);
-
-        text = (TextView) findViewById(R.id.text);
+        button = (Button) findViewById(R.id.Confirmbtn);
         spinner = (Spinner) findViewById(R.id.spin);
         // Recieve Name
         String name = getIntent().getExtras().getString("Museum_Name");
         final String img = getIntent().getExtras().getString("Museum_Image");
-        //call validation method to check
 
-
+       awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         // setting Values to each view
         museumname.setText(name);
         Glide.with(this).load(img).into(image);
         //shows calender to pick any date
-        textView2.setOnClickListener(new View.OnClickListener() {
+        text2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -82,49 +75,54 @@ public class bookTicket extends AppCompatActivity implements SlyCalendarDialog.C
                         .setSingle(true)
                         .setCallback(bookTicket.this)
                         .show(getSupportFragmentManager(), "TAG_SLYCALENDAR");
-
             }
-
         });
-
         // to call onClicklistener for timepicker
-        textView1.setOnClickListener(new View.OnClickListener() {
+        text1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePickerDialog = TimePickerDialog.newInstance(bookTicket.this,Hour, Minute,false);
-                 timePickerDialog.setThemeDark(false);
-                 timePickerDialog.setTitle("TimePicker");
-                 timePickerDialog.show(getSupportFragmentManager(),"timePickerDialog");
-             }
+                timePickerDialog = TimePickerDialog.newInstance(bookTicket.this, Hour, Minute, false);
+                timePickerDialog.setThemeDark(false);
+                timePickerDialog.setTitle("TimePicker");
+                timePickerDialog.show(getSupportFragmentManager(), "timePickerDialog");
+            }
         });
-
+        ValidData();//call validation method to check
+        confirmTicket();//method to confirm tickets
+    }
         //method to confrim ticket details and store in database
+    private  void ValidData(){
+        awesomeValidation.addValidation(bookTicket.this,R.id.spin,  RegexTemplate.NOT_EMPTY, R.string.EnterNumberOfTicket);
+        awesomeValidation.addValidation(bookTicket.this,R.id.date, RegexTemplate.NOT_EMPTY,R.string.EnterDate);
+        awesomeValidation.addValidation(bookTicket.this,R.id.time, RegexTemplate.NOT_EMPTY,R.string.EnterTime);
+    }
+      public void confirmTicket(){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mydatabase.insertTicketDetail(museumname.getText().toString(),spinner.getTextAlignment(),textView1.getText().toString(),textView2.getText().toString());
-               Toast.makeText(bookTicket.this,"Your Ticket Confirmed",Toast.LENGTH_SHORT).show();
+                if (awesomeValidation.validate()){
+                    mydatabase.insertTicketDetail(museumname.getText().toString(),spinner.getTextAlignment(),text2.getText().toString(),text1.getText().toString());
+
+                    Toast.makeText(bookTicket.this, "Your Ticket Confirmed", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(bookTicket.this,"Make sure You Enter all Fields",Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
-
-
-    }
-
-
+      }
 
     @Override
     public void onCancelled() {
 
     }
-
-
-
     @Override
     public void onDataSelected(Calendar firstDate, Calendar secondDate, int hours, int minutes) {
         if (firstDate != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
           //  SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.US);
-            textView2.setText(dateFormat.format((firstDate.getTime())));
+            text2.setText(dateFormat.format((firstDate.getTime())));
             //textView1.setText(dateFormat.format((sdf.getTimeZone())));
         }
     }
@@ -134,18 +132,12 @@ public class bookTicket extends AppCompatActivity implements SlyCalendarDialog.C
         String time = hourOfDay+"h"+minute+"m"+second;
         Toast.makeText(bookTicket.this, time, Toast.LENGTH_LONG).show();
 
-        textView1.setText(time);
+        text1.setText(time);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
     }
-    // validation for book ticket
-    public void ValidData(){
-        awesomeValidation.addValidation(bookTicket.this, R.id.spin, RegexTemplate.NOT_EMPTY, R.string.EnterNumberOfTicket);
-        awesomeValidation.addValidation(bookTicket.this, R.id.date, RegexTemplate.NOT_EMPTY, R.string.EnterDate);
-        awesomeValidation.addValidation(bookTicket.this, R.id.time, RegexTemplate.NOT_EMPTY, R.string.EnterTime);
 
-    }
 }

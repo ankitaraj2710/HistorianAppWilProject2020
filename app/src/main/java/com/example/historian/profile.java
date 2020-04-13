@@ -215,8 +215,6 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
                 }
         );
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -229,11 +227,8 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
                 Uri selectedImageUri = data.getData();
                 imageViewcamera.setImageURI(selectedImageUri);
             }
-
         }
     }
-
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -248,7 +243,6 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
             editTextcontact.setText(stateSaved);
             editTextemailid.setText(stateSaved);
             dobedittext.setText(stateSaved);
-
         }
     }
     @Override
@@ -257,8 +251,6 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
         String stateToSave = editTextfirstname.getText().toString();
         outState.putString("saved_state", stateToSave);
         Toast.makeText(profile.this,"onSaveInstanceState:\n"+"saved_state = "+stateToSave,Toast.LENGTH_LONG).show();
-
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -278,20 +270,11 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
                 stringBuffer.append("Contact : " + cursor.getString(3) + "\n");
                 stringBuffer.append("Email : " + cursor.getString(4) + "\n");
                 stringBuffer.append("DOB : " + cursor.getString(5) + "\n\n");
-//                stringBuffer.append("ID" + cursor.getString(6)+"\n");
-//                stringBuffer.append("Name" +cursor.getString(7)+"\n");
-//                stringBuffer.append("CardNumber"+ cursor.getString(8)+"\n");
-//                stringBuffer.append("CVV"+cursor.getString(9)+"\n");
-//                stringBuffer.append("ExpiryDate"+cursor.getString(10)+"\n");
             }
             ShowData("Profile Data", stringBuffer.toString());
         }
-
-
         return super.onOptionsItemSelected(item);
-
     }
-
     public void ShowData(String title, String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -300,8 +283,6 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
         builder.setMessage(message);
         builder.show();
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -319,12 +300,10 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
         }
         return false;
     }
-
     @Override
     public void onCancelled() {
 
     }
-
     @Override
     public void onDataSelected(Calendar firstDate, Calendar secondDate, int hours, int minutes) {
         if(firstDate!=null){
@@ -333,7 +312,5 @@ public class profile extends AppCompatActivity implements NavigationView.OnNavig
             //Toast.makeText(this,  dateFormat.format(firstDate.getTime()), Toast.LENGTH_SHORT).show();
         }
         //  Toast.makeText(Profile.this, firstDate.toString(), Toast.LENGTH_SHORT).show();
-
-
     }
 }

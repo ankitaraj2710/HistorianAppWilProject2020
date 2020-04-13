@@ -26,7 +26,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/mapkey" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +35,9 @@
         </activity>
         <activity android:name=".profile" />
         <activity android:name=".payment" />
+        <activity android:name=".MainActivity">
+
+        </activity>
 
         <activity android:name=".bookTicket"></activity>
         <activity android:name=".Demo" />

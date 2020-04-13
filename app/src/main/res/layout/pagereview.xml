@@ -15,7 +15,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsinglayout"
             android:layout_width="match_parent"
-            android:layout_height="264dp"
+            android:layout_height="284dp"
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleMarginEnd="80dp"
             app:expandedTitleMarginStart="48dp"
@@ -26,7 +26,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="210dp"
+                android:layout_marginTop="245dp"
                 android:layout_marginLeft="265dp"
                 android:text="Book Tickets"
                 android:id="@+id/booktickets_button"/>
@@ -127,7 +127,7 @@
                 android:id="@+id/imageb"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/male" />
+                android:src="@drawable/hemant" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -157,7 +157,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:id="@+id/imager"
-                android:src="@drawable/woman"/>
+                android:src="@drawable/sim"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,7 +184,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:id="@+id/imagec"
-                android:src="@drawable/woman"/>
+                android:src="@drawable/ankita"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

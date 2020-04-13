@@ -63,31 +63,31 @@
         android:layout_marginTop="-48dp">
     </Spinner>
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:background="@drawable/etstyle"
         android:ems="20"
-        android:text="Select date"
+        android:hint="04-03-1996"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         android:id="@+id/date"
         android:textStyle="bold">
 
-    </TextView>
-    <TextView
+    </EditText>
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@id/time"
         android:background="@drawable/etstyle"
         android:ems="20"
         android:textSize="20sp"
-        android:text="Select Time"
+        android:hint="12:30"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         android:textStyle="bold">
-    </TextView>
+    </EditText>
 
 
     <Button
